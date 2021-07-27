@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./src/plugins",
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -25,7 +26,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "src/plugins/vuetify.js"
   ],
-  "exclude": ["node_modules", "./src/plugins"]
+  "exclude": ["node_modules", "./src/plugins/**/*"]
 }
