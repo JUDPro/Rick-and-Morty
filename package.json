@@ -4,7 +4,7 @@
   "description": "",
   "author": "JUDPro",
   "scripts": {
-    "serve": "webpack serve --mode development"
+    "dev": "webpack serve --host 192.168.0.103"
   },
   "main": "main.ts",
   "devDependencies": {
