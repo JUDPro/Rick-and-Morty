@@ -37,12 +37,5 @@ export default Vue.extend({
       }
     },
   },
-  methods: {},
-  mounted() {
-    // axios
-    //   .get("https://rickandmortyapi.com/api/episode")
-    //   .then((response) => (this.info = response));
-    // console.log(this.info);
-  },
 });
 </script>

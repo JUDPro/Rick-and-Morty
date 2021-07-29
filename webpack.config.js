@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const path = require("path");
 
 module.exports = {
   entry: "./src/main.ts",
@@ -28,6 +29,16 @@ module.exports = {
         ],
       },
       { test: /\.css$/, use: ["vue-style-loader", "css-loader"] },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        include: /src/,
+        loader: "ts-loader",
+        options: {
+          transpileOnly: true,
+          appendTsSuffixTo: [/\.vue$/],
+        },
+      },
     ],
   },
   devtool: "source-map",

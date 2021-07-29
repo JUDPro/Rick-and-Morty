@@ -1,16 +1,23 @@
 <template>
   <div>
-    <v-card-actions class="d-flex justify-space-between mx-10">
-      <div>button</div>
-      <div>button</div>
-      <div>button</div>
+    <v-card-actions class="d-flex justify-space-between mx-10 px-5">
+      <div>Episode</div>
+      <div v-if="!isMobile">Season</div>
+      <div v-if="!isMobile">Date</div>
     </v-card-actions>
     <episodeItem v-for="item in episodeList" :key="item.index">
-      <span slot="episodeNumber">
-        {{ item.episode }}
-      </span>
-      <span slot="episodeName">
+      <span
+        slot="episodeName"
+        style="cursor: pointer"
+        @click="goToCharacter(item)"
+      >
         {{ item.name }}
+      </span>
+      <span slot="seasonNumber">
+        {{ item.episode.slice(2, -3) }}
+      </span>
+      <span slot="episodeNumber">
+        {{ item.episode.slice(4) }}
       </span>
       <span slot="episodeDate">
         {{ item.air_date }}
@@ -32,6 +39,26 @@ export default Vue.extend({
     return {
       episodeList: {},
     };
+  },
+  methods: {
+    goToCharacter(item: any) {
+      this.$router
+        .push({ path: "/episode/" + item.id, params: item.id })
+        .catch(() => {});
+    },
+  },
+  computed: {
+    isMobile() {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   mounted() {
     axios
