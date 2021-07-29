@@ -32,9 +32,7 @@ module.exports = {
   },
   devtool: "source-map",
   devServer: {
-    open: true,
-    hot: true,
-    host: "192.168.0.103",
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

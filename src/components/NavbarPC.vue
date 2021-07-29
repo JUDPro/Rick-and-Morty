@@ -8,10 +8,11 @@
         <v-tabs-slider color="yellow"></v-tabs-slider>
         <v-tab
           class="text-md-h6 text-sm-h6"
-          v-for="item in items"
-          :key="item"
+          v-for="item in navigation"
+          :key="item.index"
+          @click="item.goTo"
         >
-          {{ item }}
+          {{ item.name }}
         </v-tab>
       </v-tabs>
     </v-toolbar>
@@ -22,9 +23,34 @@
 import Vue from "vue";
 export default Vue.extend({
   data() {
-    return {
-      items: ["seasons", "characters", "locations"],
-    };
+    return {};
+  },
+  methods: {},
+  computed: {
+    navigation: {
+      get() {
+        return [
+          {
+            name: "episode",
+            goTo: () => {
+              this.$router.push({ path: "/episode" }).catch(() => {});
+            },
+          },
+          {
+            name: "characters",
+            goTo: () => {
+              this.$router.push({ path: "/characters" }).catch(() => {});
+            },
+          },
+          {
+            name: "locations",
+            goTo: () => {
+              this.$router.push({ path: "/locations" }).catch(() => {});
+            },
+          },
+        ];
+      },
+    },
   },
 });
 </script>

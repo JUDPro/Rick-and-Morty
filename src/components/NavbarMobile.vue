@@ -16,9 +16,9 @@
           v-model="group"
           active-class="deep-purple--text text--accent-4"
         >
-          <v-list-item v-for="item in items" :key="item">
+          <v-list-item v-for="item in navigation" :key="item.index" @click="item.goTo">
             <v-list-item-title class="text-sm-h5 text-xs-h5">{{
-              item
+              item.name
             }}</v-list-item-title>
           </v-list-item>
         </v-list-item-group>
@@ -34,8 +34,33 @@ export default Vue.extend({
     return {
       drawer: false,
       group: null,
-      items: ["seasons", "characters", "locations"],
     };
+  },
+  computed: {
+    navigation: {
+      get() {
+        return [
+          {
+            name: "episode",
+            goTo: () => {
+              this.$router.push({ path: "/episode" }).catch(() => {});
+            },
+          },
+          {
+            name: "characters",
+            goTo: () => {
+              this.$router.push({ path: "/characters" }).catch(() => {});
+            },
+          },
+          {
+            name: "locations",
+            goTo: () => {
+              this.$router.push({ path: "/locations" }).catch(() => {});
+            },
+          },
+        ];
+      },
+    },
   },
 });
 </script>
