@@ -1,22 +1,20 @@
 <template>
-  <v-main>
-    <v-toolbar color="#3949AB" dark dense>
-      <v-card-text class="text-md-h5 text-sm-h6">
-        Rick and Morty
-      </v-card-text>
-      <v-tabs class="d-flex justify-end mr-4">
-        <v-tabs-slider color="yellow"></v-tabs-slider>
-        <v-tab
-          class="text-md-h6 text-sm-h6"
-          v-for="item in navigation"
-          :key="item.index"
-          @click="item.goTo"
-        >
-          {{ item.name }}
-        </v-tab>
-      </v-tabs>
-    </v-toolbar>
-  </v-main>
+  <v-toolbar color="#3949AB" dark dense flat>
+    <v-card-text class="text-md-h5 text-sm-h6">
+      Rick and Morty
+    </v-card-text>
+    <v-tabs class="d-flex justify-end mr-4">
+      <v-tabs-slider color="yellow"></v-tabs-slider>
+      <v-tab
+        class="text-md-h6 text-sm-h6"
+        v-for="item in navigation"
+        :key="item.index"
+        @click="item.goTo"
+      >
+        {{ item.name }}
+      </v-tab>
+    </v-tabs>
+  </v-toolbar>
 </template>
 
 <script lang="ts">

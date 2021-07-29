@@ -1,6 +1,6 @@
 <template>
-  <v-main style="overflow: hidden">
-    <v-toolbar color="#3949AB" dark dense>
+  <div >
+    <v-toolbar color="#3949AB" dark dense flat>
       <v-container class="d-flex justify-space-between align-center">
         <v-card-title primary-title>
           Rick and Morty
@@ -24,7 +24,7 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-  </v-main>
+  </div>
 </template>
 
 <script lang="ts">
