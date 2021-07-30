@@ -1,9 +1,20 @@
 <template>
   <div>
     <v-card-actions class="d-flex justify-space-between mx-10 px-5">
-      <div>Episode</div>
+      <div v-if="!isMobile">Episode</div>
 
-      <div class="text-center" v-if="!isMobile">
+      <div class="text-center">
+        <div class="d-flex align-center">
+          <v-text-field
+            class="mr-5"
+            v-model="nameEpisode"
+            label="Search"
+            clearable
+            @keyup.enter="episodeSearchResults"
+          ></v-text-field>
+          <v-btn elevation="2" @click="episodeSearchResults">Enter</v-btn>
+        </div>
+
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark v-bind="attrs" v-on="on">
@@ -22,17 +33,6 @@
             </v-list-item>
           </v-list>
         </v-menu>
-      </div>
-
-      <div class="d-flex align-center">
-        <v-text-field
-          class="mr-5"
-          v-model="nameEpisode"
-          label="Search"
-          clearable
-          @keyup.enter="episodeSearchResults"
-        ></v-text-field>
-        <v-btn elevation="2" @click="episodeSearchResults">Enter</v-btn>
       </div>
 
       <div v-if="!isMobile">Date</div>
@@ -113,11 +113,13 @@ export default Vue.extend({
           }
         })
         .catch((err) => {
-          this.episodeList = [{
-            name: "Nothing was found :(",
-            episode: "",
-            air_date: "",
-          }];
+          this.episodeList = [
+            {
+              name: "Nothing was found :(",
+              episode: "",
+              air_date: "",
+            },
+          ];
         });
     },
   },
