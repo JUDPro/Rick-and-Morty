@@ -15,14 +15,16 @@
     <v-expansion-panels v-if="isMobile" class="my-2">
       <v-expansion-panel>
         <v-expansion-panel-header>
-          <slot name="episodeName"></slot>
+          <v-list-item dense class="text-decoration-underline text-h5" >
+            <slot name="episodeName"></slot>
+          </v-list-item>
         </v-expansion-panel-header>
         <v-expansion-panel-content>
           <v-list-item-title>
             <span>Season</span><slot name="seasonNumber"></slot>
             <span>Episode</span><slot name="episodeNumber"></slot>
           </v-list-item-title>
-          <v-list-item-subtitle class="d-flex justify-end">
+          <v-list-item-subtitle class="pl-4">
             <slot name="episodeDate"></slot>
           </v-list-item-subtitle>
         </v-expansion-panel-content>

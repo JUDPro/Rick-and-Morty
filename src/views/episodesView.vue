@@ -6,13 +6,15 @@
       <div v-if="!isMobile">Date</div>
     </v-card-actions>
     <episodeItem v-for="item in episodeList" :key="item.index">
-      <span
-        slot="episodeName"
-        style="cursor: pointer"
-        @click="goToCharacter(item)"
-      >
-        {{ item.name }}
-      </span>
+        <span
+          slot="episodeName"
+          style="cursor: pointer"
+          @click="goToEpisodeData(item)"
+        >
+        <v-card flat>
+          {{ item.name }}
+        </v-card>
+        </span>
       <span slot="seasonNumber">
         {{ item.episode.slice(2, -3) }}
       </span>
@@ -41,7 +43,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    goToCharacter(item: any) {
+    goToEpisodeData(item: any) {
       this.$router
         .push({ path: "/episode/" + item.id, params: item.id })
         .catch(() => {});
