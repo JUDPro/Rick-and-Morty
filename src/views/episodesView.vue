@@ -2,19 +2,40 @@
   <div>
     <v-card-actions class="d-flex justify-space-between mx-10 px-5">
       <div>Episode</div>
-      <div v-if="!isMobile">Season</div>
+      <div v-if="!isMobile">
+        <div class="text-center">
+          <v-menu offset-y>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="primary" dark v-bind="attrs" v-on="on">
+                Season
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item
+                style="cursor: pointer"
+                class="d-flex justify-center"
+                v-for="item in seasonsList"
+                :key="item.index"
+                @click="groupSeasons(item.season)"
+              >
+                <v-btn-toggle>{{ item.season }}</v-btn-toggle>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
+      </div>
       <div v-if="!isMobile">Date</div>
     </v-card-actions>
     <episodeItem v-for="item in episodeList" :key="item.index">
-        <span
-          slot="episodeName"
-          style="cursor: pointer"
-          @click="goToEpisodeData(item)"
-        >
+      <span
+        slot="episodeName"
+        style="cursor: pointer"
+        @click="goToEpisodeData(item)"
+      >
         <v-card flat>
           {{ item.name }}
         </v-card>
-        </span>
+      </span>
       <span slot="seasonNumber">
         {{ item.episode.slice(2, -3) }}
       </span>
@@ -40,13 +61,31 @@ export default Vue.extend({
   data() {
     return {
       episodeList: {},
+      seasonsList: [
+        { season: "1" },
+        { season: "2" },
+        { season: "3" },
+        { season: "4" },
+      ],
+      season: "1" as String,
     };
   },
   methods: {
+    getData(item: String) {
+      axios
+        .get("https://rickandmortyapi.com/api/episode/?episode=S0" + item)
+        .then((response) => {
+          const result = response.data.results;
+          this.episodeList = result;
+        });
+    },
     goToEpisodeData(item: any) {
       this.$router
         .push({ path: "/episode/" + item.id, params: item.id })
         .catch(() => {});
+    },
+    groupSeasons(list: String) {
+      this.getData(list);
     },
   },
   computed: {
@@ -63,9 +102,7 @@ export default Vue.extend({
     },
   },
   mounted() {
-    axios
-      .get("https://rickandmortyapi.com/api/episode")
-      .then((response) => (this.episodeList = response.data.results));
+    this.getData(this.season);
   },
 });
 </script>
