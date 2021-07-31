@@ -2,16 +2,17 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import episodesList from "../views/EpisodesList.vue";
 import charactersList from "../views/CharactersList.vue";
-import locationsView from "../views/LocationsView.vue";
+import locationsList from "../views/LocationsList.vue";
 import episode from "../views/Episode.vue";
 import character from "../views/Character.vue";
+import location from "../views/Location.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    redirect: "/charactersList",
+    redirect: "/episodeList",
   },
   {
     path: "/episodeList",
@@ -36,9 +37,15 @@ const routes = [
     props: true,
   },
   {
-    path: "/locations",
-    name: "locations",
-    component: locationsView,
+    path: "/locationsList",
+    name: "locationsList",
+    component: locationsList,
+  },
+  {
+    path: "/location/:id",
+    name: "location",
+    component: location,
+    props: true,
   },
 ];
 

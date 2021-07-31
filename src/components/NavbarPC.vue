@@ -43,7 +43,7 @@ export default Vue.extend({
           {
             name: "locations",
             goTo: () => {
-              this.$router.push({ path: "/locations" }).catch(() => {});
+              this.$router.push({ path: "/locationsList" }).catch(() => {});
             },
           },
         ];
