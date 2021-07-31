@@ -70,9 +70,9 @@ export default Vue.extend({
     };
   },
   methods: {
-    getData(item: any) {
+    getData(status: "") {
       axios
-        .get("https://rickandmortyapi.com/api/character/?status=" + item)
+        .get("https://rickandmortyapi.com/api/character/?status=" + status)
         .then((response) => {
           this.charactersList = response.data.results;
         });
@@ -104,8 +104,17 @@ export default Vue.extend({
           ];
         });
     },
-    filterByStatus(list: String) {
-      this.getData(list);
+    filterByStatus(status: "", name: "") {
+      axios
+        .get(
+          "https://rickandmortyapi.com/api/character/?status=" +
+            status +
+            "&name=" +
+            this.characterName.toLowerCase()
+        )
+        .then((response) => {
+          this.charactersList = response.data.results;
+        });
     },
   },
   mounted() {
