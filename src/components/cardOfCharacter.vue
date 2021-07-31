@@ -8,6 +8,10 @@
     >
       <v-card-title v-text="nameCharacter"></v-card-title>
     </v-img>
+    <v-card-text>
+      Status: <slot name="statusCharacter"></slot><br />
+      Species: <slot name="speciesCharacter"></slot>
+    </v-card-text>
   </v-card>
 </template>
 

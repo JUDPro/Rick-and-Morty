@@ -10,11 +10,20 @@
     </v-card-title>
     <v-card-title class="d-flex justify-center">Characters: </v-card-title>
     <v-row>
-      <v-col class="col-md-3" v-for="item in listCharacter" :key="item.index" fluid>
-        <cardOfCharacter
+      <v-col
+        class="col-md-3"
+        v-for="item in listCharacter"
+        :key="item.id"
+        @click="goToCharacterData(item.data.id)"
+        fluid
+      >
+        <card-of-character
           :urlImg="item.data.image"
           :nameCharacter="item.data.name"
-        ></cardOfCharacter>
+        >
+          <span slot="statusCharacter">{{ item.data.status }}</span>
+          <span slot="speciesCharacter">{{ item.data.species }}</span>
+        </card-of-character>
       </v-col>
     </v-row>
   </v-card>
@@ -23,7 +32,7 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "axios";
-import cardOfCharacter from "../components/cardOfCharacter.vue";
+import cardOfCharacter from "../components/CardOfCharacter.vue";
 
 export default Vue.extend({
   props: ["id"],
@@ -38,6 +47,13 @@ export default Vue.extend({
       listCharacter: [],
     };
   },
+  methods: {
+    goToCharacterData(item: any) {
+      this.$router
+        .push({ path: "/character/" + item, params: item })
+        .catch(() => {});
+    },
+  },
   mounted() {
     axios
       .get("https://rickandmortyapi.com/api/episode/" + this.id)
@@ -45,7 +61,9 @@ export default Vue.extend({
         this.episodeData = response.data;
         this.sliceSeason = response.data.episode.slice(2, -3);
         this.sliceEpisodeNumber = response.data.episode.slice(4);
-        const list = response.data.characters.map((url: any) => axios.get(url));
+        const list = response.data.characters.map((url: string) =>
+          axios.get(url)
+        );
         Promise.all(list).then((response: any) => {
           this.listCharacter = response;
         });

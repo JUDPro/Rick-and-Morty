@@ -37,7 +37,7 @@ export default Vue.extend({
           {
             name: "characters",
             goTo: () => {
-              this.$router.push({ path: "/characters" }).catch(() => {});
+              this.$router.push({ path: "/charactersList" }).catch(() => {});
             },
           },
           {
