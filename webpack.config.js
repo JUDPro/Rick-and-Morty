@@ -39,7 +39,20 @@ module.exports = {
           appendTsSuffixTo: [/\.vue$/],
         },
       },
+      {
+        test: /\.ts?$/,
+        loader: "ts-loader",
+        include: /src/,
+        exclude: /node_modules/,
+        options: {
+          transpileOnly: true,
+          appendTsSuffixTo: [/\.vue$/],
+        },
+      },
     ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
   },
   devtool: "source-map",
   devServer: {
